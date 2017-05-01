@@ -19,7 +19,9 @@
 		CD98E7551EB328DC007DAD09 /* ContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7531EB328DC007DAD09 /* ContentsController.swift */; };
 		CD98E7561EB328DC007DAD09 /* ContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7531EB328DC007DAD09 /* ContentsController.swift */; };
 		CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */; };
-		CDFB89251EB4BA6B00EA0CBE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89241EB4BA6B00EA0CBE /* Image.swift */; };
+		CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
+		CDFB89281EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
+		CDFB89291EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +58,7 @@
 		CD98E7471EB32849007DAD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD98E7531EB328DC007DAD09 /* ContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentsController.swift; sourceTree = "<group>"; };
 		CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionBarView.swift; sourceTree = "<group>"; };
-		CDFB89241EB4BA6B00EA0CBE /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CDFB89261EB4F5C700EA0CBE /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,11 +110,11 @@
 			isa = PBXGroup;
 			children = (
 				CD98E7221EB32849007DAD09 /* AppDelegate.swift */,
-				CD98E7241EB32849007DAD09 /* ViewController.swift */,
 				CD98E7261EB32849007DAD09 /* Main.storyboard */,
+				CD98E7241EB32849007DAD09 /* ViewController.swift */,
 				CD98E7531EB328DC007DAD09 /* ContentsController.swift */,
+				CDFB89261EB4F5C700EA0CBE /* Content.swift */,
 				CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */,
-				CDFB89241EB4BA6B00EA0CBE /* Image.swift */,
 				CD98E72C1EB32849007DAD09 /* Assets.xcassets */,
 				CD98E72E1EB32849007DAD09 /* LaunchScreen.storyboard */,
 				CD98E7311EB32849007DAD09 /* Info.plist */,
@@ -277,7 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */,
-				CDFB89251EB4BA6B00EA0CBE /* Image.swift in Sources */,
+				CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */,
 				CD98E7251EB32849007DAD09 /* ViewController.swift in Sources */,
 				CD98E7541EB328DC007DAD09 /* ContentsController.swift in Sources */,
 				CD98E7231EB32849007DAD09 /* AppDelegate.swift in Sources */,
@@ -291,6 +293,7 @@
 			files = (
 				CD98E73B1EB32849007DAD09 /* Master_BotTests.swift in Sources */,
 				CD98E7551EB328DC007DAD09 /* ContentsController.swift in Sources */,
+				CDFB89281EB4F5C700EA0CBE /* Content.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +303,7 @@
 			files = (
 				CD98E7461EB32849007DAD09 /* Master_BotUITests.swift in Sources */,
 				CD98E7561EB328DC007DAD09 /* ContentsController.swift in Sources */,
+				CDFB89291EB4F5C700EA0CBE /* Content.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

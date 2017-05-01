@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +27,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUu-VG-HOS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                         <connections>
-                                            <segue destination="Wc3-jH-3U1" kind="embed" id="f1d-PX-43Q"/>
+                                            <segue destination="Wc3-jH-3U1" kind="embed" identifier="send" id="f1d-PX-43Q"/>
                                         </connections>
                                     </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agd-Lc-36l" userLabel="InputView">
@@ -93,6 +93,7 @@
                         <outlet property="ContentsContainView" destination="VUu-VG-HOS" id="qkP-0a-PVd"/>
                         <outlet property="ContentsInputView" destination="iU4-0n-7mb" id="PfR-fR-5KA"/>
                         <outlet property="ContentsInputViewBottomConstraint" destination="sUU-zW-Ns9" id="v6c-Za-NCE"/>
+                        <outlet property="ContentsTableContainer" destination="VUu-VG-HOS" id="c4m-5p-TQN"/>
                         <outlet property="InputTextField" destination="v4r-gi-lFA" id="sHT-14-frm"/>
                         <outlet property="InputView" destination="Agd-Lc-36l" id="huc-sv-5xo"/>
                         <outlet property="SendButton" destination="iM7-OS-iJq" id="jRW-MK-U9u"/>
@@ -111,16 +112,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0mF-UF-Ken">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="0mF-UF-Ken" customClass="Content" customModule="Master_Bot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0mF-UF-Ken" id="c5n-hr-hRV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <connections>
+                        <outlet property="ContentsTableView" destination="xDr-p4-ADw" id="Aju-m9-q5t"/>
+                        <outlet property="TableView" destination="xDr-p4-ADw" id="JPn-Ed-Sy6"/>
+                        <outlet property="tableView" destination="xDr-p4-ADw" id="KaQ-bv-8HN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W33-c2-tag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

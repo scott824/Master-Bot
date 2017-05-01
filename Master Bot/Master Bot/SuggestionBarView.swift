@@ -56,7 +56,7 @@ class SuggestionBarView: UIView {
             removeAllElements()
             addElement(name: "오늘")
             addElement(name: "내일")
-            addElement(name: "주말")
+            addElement(name: "주간")
         }
         else if input.contains("피") {
             removeAllElements()
@@ -174,7 +174,6 @@ class SuggestionBarView: UIView {
     // TODO: 정리 필요!! - 텍스트의 자동완성된 부분을 수정해야함
     func elementTouchUpInsideHandler(button: UIButton) {
         button.backgroundColor = UIColor.white
-        NSLog((button.subviews.last as! UILabel).text!)
         
         if let text = (button.subviews.last as! UILabel).text {
             if let input = delegate?.inputTextFieldValue {
@@ -194,10 +193,10 @@ class SuggestionBarView: UIView {
             }
         }
     }
-    
     // make NSLayoutConstraint in short code
     func makeConstraint(_ item: Any, _ itemAttribute: NSLayoutAttribute, _ toItem: Any? = nil, _ toItemAttribute: NSLayoutAttribute = .notAnAttribute, mutiplier: Double = 1.0, constant: Double = 0.0) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: item, attribute: itemAttribute, relatedBy: .equal, toItem: toItem, attribute: toItemAttribute, multiplier: CGFloat(mutiplier), constant: CGFloat(constant))
     }
-
 }
+
+

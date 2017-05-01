@@ -8,10 +8,22 @@
 
 import UIKit
 
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//  Main View Controller
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
 class ViewController: UIViewController, SuggestionBarDelegate {
     
-    // suggestion bar upside of the keyboard
+    // ContentsController
+    var contentsContainView: ContentsController! = nil
+    
+    // SuggestionBar
     var suggestionBarView: SuggestionBarView! = nil
+    
     
     
     
@@ -29,7 +41,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     @IBOutlet weak var ContentsInputViewBottomConstraint: NSLayoutConstraint!
     
     // contents table view (chat)
-    @IBOutlet weak var ContentsContainView: UIView!
+    @IBOutlet weak var ContentsTableContainer: UIView!
     
     // bottom input view
     @IBOutlet weak var InputView: UIView!
@@ -43,6 +55,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
 //  Override functions
 //      viewDidLoad() - initialization function of UIViewController
 //      didReceiveMemoryWarning()
+//      prepare() - for segue
 //
 ////////////////////////////////////////////////////////////////////////////////
     
@@ -68,6 +81,17 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // segue to ContentsController
+        if segue.identifier == "send" {
+            NSLog("set destination")
+            contentsContainView = segue.destination as! ContentsController
+            contentsContainView.inputText = inputTextFieldValue
+        }
+        
     }
     
     
@@ -103,9 +127,10 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     }
     
     @IBAction func ClickSendButton(_ sender: Any) {
-        let inputText = inputTextFieldValue
+        NSLog("Click Send Button")
+        contentsContainView.inputText = inputTextFieldValue
         inputTextFieldValue = ""
-        
+        dismissKeyboard()
     }
     
     
@@ -134,7 +159,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     
     // hide keyboard
     func dismissKeyboard() {
-        view.endEditing(true)
+        InputTextField.endEditing(true)
     }
 
 }
