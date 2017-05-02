@@ -10,8 +10,8 @@
         <attribute name="toItemAttr" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <entity name="ContentId" representedClassName="ContentId" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ContentSubviews" representedClassName="ContentSubviews" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -21,8 +21,8 @@
         <attribute name="type" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ContentId" positionX="-198" positionY="-72" width="128" height="73"/>
-        <element name="ContentSubviews" positionX="-20" positionY="69" width="128" height="120"/>
         <element name="ContentConstraints" positionX="171" positionY="-105" width="128" height="150"/>
+        <element name="ContentId" positionX="-198" positionY="-72" width="128" height="28"/>
+        <element name="ContentSubviews" positionX="-20" positionY="69" width="128" height="120"/>
     </elements>
 </model>

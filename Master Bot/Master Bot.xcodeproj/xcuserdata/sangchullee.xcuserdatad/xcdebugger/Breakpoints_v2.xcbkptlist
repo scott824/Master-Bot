@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Master Bot/ContentsController.swift"
-            timestampString = "515341854.558682"
+            timestampString = "515355270.623713"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "inputText"
             landmarkType = "24">
          </BreakpointContent>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -15,6 +16,8 @@ import UIKit
 ////////////////////////////////////////////////////////////////////////////////
 
 class ContentsController: UITableViewController {
+    
+    var contentIds: [NSManagedObject] = []
     
     @IBOutlet var ContentsTableView: UITableView!
     
@@ -58,6 +61,27 @@ class ContentsController: UITableViewController {
         // cell separator style
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        //let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ContentId")
+        let fetchRequest = NSFetchRequest<NSManagedObject>()
+        do {
+            try contentIds = managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            NSLog("Cound not fetch \(error)")
+        }
+        for i in contentIds {
+            NSLog(String(describing: i.value(forKey: "name")))
+            NSLog(String(describing: i.value(forKey: "id")))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,10 +133,24 @@ class ContentsController: UITableViewController {
         var content = ContentInfo(name: "self", type: .content)
         
         if inputText.contains("날씨") {
+            //var id = contentId[0].value(forKey: "id") as? Int
             let image = #imageLiteral(resourceName: "todayweather")
             let ratio = image.size.height / image.size.width
             content.subviews = [ContentInfo(name: "imageView", type: .UIImageView, image: image)]
             content.constraints = [Constraint("imageView", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0), Constraint("imageView", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0), Constraint("imageView", .width, "self", .width, multiplier: 1.0, constant: 0.0), Constraint("imageView", .height, "self", .height, multiplier: Double(ratio), constant: 0.0)]
+        }
+        else if inputText.contains("id") {
+            var text = ""
+            for i in contentIds {
+                text += String(i.value(forKey: "id") as! Int) + " " + (i.value(forKey: "name") as! String)
+            }
+            content.subviews = [ContentInfo(name: "label", type: .UILabel, text: text)]
+            content.constraints = [Constraint("label", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0), Constraint("label", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0), Constraint("label", .width, "self", .width, multiplier: 1.0, constant: 0.0), Constraint("label", .height, "self", .height, multiplier: 1.0, constant: 0.0)]
+            NSLog(String(describing: contentIds))
+        }
+        else {
+            var str = inputText.components(separatedBy: " ")
+            save(id: Int(str[0])!, name: str[1])
         }
         
         self.contents.append(content)
@@ -163,5 +201,27 @@ class ContentsController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func save(id: Int, name: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "ContentId", in: managedContext)!
+        
+        let contentId = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        contentId.setValue(name, forKey: "name")
+        contentId.setValue(id, forKey: "id")
+        
+        do {
+            try managedContext.save()
+            self.contentIds.append(contentId)
+        } catch let error as NSError {
+            NSLog("Could not save: \(error)")
+        }
+    }
 }
+
+
