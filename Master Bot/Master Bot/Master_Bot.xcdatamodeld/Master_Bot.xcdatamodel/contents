@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ContentConstraints" representedClassName="ContentConstraints" syncable="YES" codeGenerationType="class">
+    <entity name="ContentConstraint" representedClassName=".ContentConstraint" syncable="YES">
         <attribute name="constant" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="itemAttr" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="multiplier" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="toItem" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toItemAttr" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="item" attributeType="String" syncable="YES"/>
+        <attribute name="itemAttr" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="multiplier" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="toItem" attributeType="String" syncable="YES"/>
+        <attribute name="toItemAttr" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="ContentId" representedClassName="ContentId" syncable="YES" codeGenerationType="class">
+    <entity name="ContentId" representedClassName=".ContentId" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ContentSubviews" representedClassName="ContentSubviews" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="ContentSubview" representedClassName=".ContentSubview" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="parentName" attributeType="String" syncable="YES"/>
         <attribute name="proportion" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ContentConstraints" positionX="171" positionY="-105" width="128" height="150"/>
-        <element name="ContentId" positionX="-198" positionY="-72" width="128" height="28"/>
-        <element name="ContentSubviews" positionX="-20" positionY="69" width="128" height="120"/>
+        <element name="ContentConstraint" positionX="171" positionY="-105" width="128" height="150"/>
+        <element name="ContentId" positionX="-198" positionY="-72" width="128" height="75"/>
+        <element name="ContentSubview" positionX="-20" positionY="69" width="128" height="150"/>
     </elements>
 </model>

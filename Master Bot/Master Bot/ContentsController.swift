@@ -15,9 +15,9 @@ import CoreData
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-class ContentsController: UITableViewController {
+class ContentsController: UITableViewController, RequestControllerDelegate {
     
-    var contentIds: [NSManagedObject] = []
+    var datacontroller: DataController?
     
     @IBOutlet var ContentsTableView: UITableView!
     
@@ -26,24 +26,17 @@ class ContentsController: UITableViewController {
         didSet {
             if inputText != "" {
                 NSLog("didSet inputText in ContentsController")
+                
                 makeContent()
                 
-                // Add row
-                ContentsTableView?.beginUpdates()
-                ContentsTableView?.insertRows(at: [IndexPath(row: contents.endIndex-1, section: 0)], with: .automatic)
-                ContentsTableView?.endUpdates()
-                
-                // scroll down
-                if contents.count > 0 {
-                    let indexPath = IndexPath(row: contents.count - 1, section: 0)
-                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                }
             }
         }
     }
     
+    // contents in table
     var contents: [ContentInfo] = []
 
+    
     
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -56,32 +49,18 @@ class ContentsController: UITableViewController {
         
         // for cell height
         self.ContentsTableView.rowHeight = UITableViewAutomaticDimension
-        self.ContentsTableView.estimatedRowHeight = 50
+        self.ContentsTableView.estimatedRowHeight = 50.0
         
         // cell separator style
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        //let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ContentId")
-        let fetchRequest = NSFetchRequest<NSManagedObject>()
-        do {
-            try contentIds = managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            NSLog("Cound not fetch \(error)")
-        }
-        for i in contentIds {
-            NSLog(String(describing: i.value(forKey: "name")))
-            NSLog(String(describing: i.value(forKey: "id")))
-        }
+        datacontroller = DataController()
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,9 +86,15 @@ class ContentsController: UITableViewController {
 
         //cell.backgroundColor = UIColor.gray
         setCell(cell, index: indexPath.row)
+        
+        // for cell height
+        self.ContentsTableView.rowHeight = UITableViewAutomaticDimension
+        self.ContentsTableView.estimatedRowHeight = 50.0
 
         return cell
     }
+    
+    
     
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -117,12 +102,32 @@ class ContentsController: UITableViewController {
 //
 ////////////////////////////////////////////////////////////////////////////////
     
+    // set cell by contents[index]
     func setCell(_ cell: Content, index: Int) {
-        NSLog("Set Cell")
+        NSLog("Set Cell at row " + String(index))
         let content = self.contents[index]
         cell.setContent(contentInfo: content)
     }
     
+    func addContent(contentInfo: ContentInfo) {
+        self.contents.append(contentInfo)
+        NSLog("Begin Update")
+        
+        // Add row
+        ContentsTableView?.beginUpdates()
+        ContentsTableView?.insertRows(at: [IndexPath(row: contents.endIndex-1, section: 0)], with: .automatic)
+        ContentsTableView?.endUpdates()
+        
+        NSLog("End Update")
+        
+        // scroll down
+        if contents.count > 0 {
+            let indexPath = IndexPath(row: contents.count - 1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
+    }
+    
+    // Make Content Card
     func makeContent() {
         guard let inputText = inputText else {
             return
@@ -134,23 +139,53 @@ class ContentsController: UITableViewController {
         
         if inputText.contains("날씨") {
             //var id = contentId[0].value(forKey: "id") as? Int
-            let image = #imageLiteral(resourceName: "todayweather")
-            let ratio = image.size.height / image.size.width
-            content.subviews = [ContentInfo(name: "imageView", type: .UIImageView, image: image)]
-            content.constraints = [Constraint("imageView", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0), Constraint("imageView", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0), Constraint("imageView", .width, "self", .width, multiplier: 1.0, constant: 0.0), Constraint("imageView", .height, "self", .height, multiplier: Double(ratio), constant: 0.0)]
+//            let image = #imageLiteral(resourceName: "todayweather")
+//            let ratio = image.size.height / image.size.width
+//            content.subviews = [ContentInfo(name: "imageView", type: .UIImageView, image: image)]
+//            content.constraints = [Constraint("imageView", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0),
+//                                   Constraint("imageView", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0),
+//                                   Constraint("imageView", .width, "self", .width, multiplier: 1.0, constant: 0.0),
+//                                   Constraint("imageView", .height, "self", .height, multiplier: Double(ratio), constant: 0.0)]
+            
+            if var contentinfo = datacontroller?.getContentData(input: "날씨") {
+                contentinfo.subviews?[0].subviews?[0].image = #imageLiteral(resourceName: "s01")
+                let request = RequestController()
+                request.delegate = self
+                request.request(contentInfo: contentinfo)
+                //addContent(contentInfo: contentinfo)
+                //self.contents.append(contentinfo)
+                NSLog("append content to constents")
+            }
+            return
         }
         else if inputText.contains("id") {
+            NSLog("input: id")
             var text = ""
-            for i in contentIds {
-                text += String(i.value(forKey: "id") as! Int) + " " + (i.value(forKey: "name") as! String)
+            if let contentIds = datacontroller?.contentIds {
+                NSLog("start loop")
+                for i in contentIds {
+                    NSLog("inside loop")
+                    if let name = i.name {
+                        text += String(i.id) + name
+                    }
+                }
             }
+            NSLog("make text")
             content.subviews = [ContentInfo(name: "label", type: .UILabel, text: text)]
-            content.constraints = [Constraint("label", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0), Constraint("label", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0), Constraint("label", .width, "self", .width, multiplier: 1.0, constant: 0.0), Constraint("label", .height, "self", .height, multiplier: 1.0, constant: 0.0)]
-            NSLog(String(describing: contentIds))
+            content.constraints = [Constraint("label", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0),
+                                   Constraint("label", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0),
+                                   Constraint("label", .width, "self", .width, multiplier: 1.0, constant: -20.0),
+                                   Constraint("label", .height, "self", .height, multiplier: 1.0, constant: -20.0)]
+        }
+        else if inputText.contains("delete") {
+            datacontroller?.deleteAll()
+        }
+        else if inputText.contains("firstdata") {
+            datacontroller?.firstData()
         }
         else {
             var str = inputText.components(separatedBy: " ")
-            save(id: Int(str[0])!, name: str[1])
+            datacontroller?.save(id: Int(str[0])!, name: str[1])
         }
         
         self.contents.append(content)
@@ -201,27 +236,7 @@ class ContentsController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    func save(id: Int, name: String) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "ContentId", in: managedContext)!
-        
-        let contentId = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        contentId.setValue(name, forKey: "name")
-        contentId.setValue(id, forKey: "id")
-        
-        do {
-            try managedContext.save()
-            self.contentIds.append(contentId)
-        } catch let error as NSError {
-            NSLog("Could not save: \(error)")
-        }
-    }
+
 }
 
 

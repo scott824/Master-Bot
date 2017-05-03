@@ -26,27 +26,23 @@ struct ContentInfo {
     var proportion: Double?
     var image: UIImage?
     
-    init(name: String, type: ViewType) {
+    init(name: String, type: ViewType, text: String? = nil, proportion: Double? = nil, image: UIImage? = nil) {
         self.name = name
         self.type = type
-    }
-    init(name: String, type: ViewType, text: String) {
-        self.init(name: name, type: type)
         self.text = text
-    }
-    init(name: String, type: ViewType, image: UIImage) {
-        self.init(name: name, type: type)
+        self.proportion = proportion
         self.image = image
     }
 }
 
-enum ViewType {
-    case content
-    case UIView
-    case UIImageView
-    case UILabel
-    case UIButton
-    case UIWebView
+enum ViewType: Int32 {
+    case content = 0
+    case UIView = 1
+    case UIImageView = 2
+    case UILabel = 3
+    case UIButton = 4
+    case UIWebView = 5
+    
 }
 
 struct Constraint {
@@ -87,6 +83,13 @@ class Content: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func resetCell() {
+        for subview in self.subviews {
+            subview.removeFromSuperview()
+        }
+        _subviews = [:]
+    }
+    
     func setContent(contentInfo: ContentInfo, parent: UIView? = nil) {
         NSLog("Set content: " + contentInfo.name)
         
@@ -97,6 +100,7 @@ class Content: UITableViewCell {
             parent.addSubview(child)
             child.translatesAutoresizingMaskIntoConstraints = false
         } else {
+            resetCell()
             _subviews["self"] = self
         }
         
@@ -128,40 +132,24 @@ class Content: UITableViewCell {
         case .UIView:
             view = UIView()
         case .UILabel:
+            NSLog("make label")
             view = UILabel()
             (view as! UILabel).text = contentInfo.text
         case .UIImageView:
+            NSLog("make image view")
             view = UIImageView()
+            (view as! UIImageView).sizeToFit()
             (view as! UIImageView).image = contentInfo.image
             (view as! UIImageView).contentMode = UIViewContentMode.scaleAspectFit
         default:
-            return 0
+            view = 0
+            break
         }
+        
+        (view as! UIView).layer.borderColor = UIColor.gray.cgColor
+        (view as! UIView).layer.borderWidth = 1
+        
         return view
-    }
-    
-    func AddImageView(image: UIImage) {
-        let imageView = UIImageView(image: image)
-        let ratio = image.size.height / image.size.width
-        
-        self.addSubview(imageView)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let positionXConstraint = makeConstraint(imageView, .centerX, self, .centerX)
-        let positionYConstraint = makeConstraint(imageView, .centerY, self, .centerY)
-        let widthConstraint = makeConstraint(imageView, .width, self, .width)
-        let heightConstraint = makeConstraint(imageView, .height, constant: Double(self.frame.width * ratio))
-        let marginConstraint = makeConstraint(imageView, .top, self, .top)
-        
-        //let height = makeConstraint(self, .height, constant: Double(image.size.height))
-        self.addConstraints([positionXConstraint, positionYConstraint, widthConstraint, heightConstraint, marginConstraint])
-        imageView.sizeToFit()
-        
-        imageView.contentMode = .scaleAspectFit
-        
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.borderWidth = 1
     }
     
     // TODO: SuggestionBarView.swift 와 중복된 코드!! 정리 필요

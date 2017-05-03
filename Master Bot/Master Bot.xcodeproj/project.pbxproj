@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1C49DB1EBA32FE00968193 /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C49DA1EBA32FE00968193 /* RequestController.swift */; };
+		CD1C49DC1EBA32FE00968193 /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C49DA1EBA32FE00968193 /* RequestController.swift */; };
+		CD1C49DD1EBA32FE00968193 /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C49DA1EBA32FE00968193 /* RequestController.swift */; };
 		CD98E7231EB32849007DAD09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7221EB32849007DAD09 /* AppDelegate.swift */; };
 		CD98E7251EB32849007DAD09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* ViewController.swift */; };
 		CD98E7281EB32849007DAD09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD98E7261EB32849007DAD09 /* Main.storyboard */; };
@@ -31,6 +34,27 @@
 		CDAEAC681EB7AD4800E70D9F /* SuggestionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */; };
 		CDAEAC691EB7AD4C00E70D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD98E72C1EB32849007DAD09 /* Assets.xcassets */; };
 		CDAEAC6A1EB7AD4C00E70D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD98E72C1EB32849007DAD09 /* Assets.xcassets */; };
+		CDBE200C1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20061EB8DEA100D3A416 /* ContentId+CoreDataClass.swift */; };
+		CDBE200D1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20061EB8DEA100D3A416 /* ContentId+CoreDataClass.swift */; };
+		CDBE200E1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20061EB8DEA100D3A416 /* ContentId+CoreDataClass.swift */; };
+		CDBE200F1EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20071EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift */; };
+		CDBE20101EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20071EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift */; };
+		CDBE20111EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20071EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift */; };
+		CDBE20121EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20081EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift */; };
+		CDBE20131EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20081EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift */; };
+		CDBE20141EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20081EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift */; };
+		CDBE20151EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20091EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift */; };
+		CDBE20161EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20091EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift */; };
+		CDBE20171EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE20091EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift */; };
+		CDBE20181EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift */; };
+		CDBE20191EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift */; };
+		CDBE201A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift */; };
+		CDBE201B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift */; };
+		CDBE201C1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift */; };
+		CDBE201D1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBE200B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift */; };
+		CDBE201F1EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
+		CDBE20201EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
+		CDBE20211EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
 		CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */; };
 		CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
 		CDFB89281EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
@@ -55,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD1C49DA1EBA32FE00968193 /* RequestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestController.swift; sourceTree = "<group>"; };
 		CD98E71F1EB32849007DAD09 /* Master Bot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Master Bot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD98E7221EB32849007DAD09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD98E7241EB32849007DAD09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +96,13 @@
 		CD98E7471EB32849007DAD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD98E7531EB328DC007DAD09 /* ContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentsController.swift; sourceTree = "<group>"; };
 		CDAEAC5D1EB7A71300E70D9F /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		CDBE20061EB8DEA100D3A416 /* ContentId+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentId+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CDBE20071EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentId+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CDBE20081EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentSubview+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CDBE20091EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentSubview+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CDBE200A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentConstraint+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CDBE200B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentConstraint+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CDBE201E1EB8F89D00D3A416 /* weather.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = weather.xcassets; sourceTree = "<group>"; };
 		CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionBarView.swift; sourceTree = "<group>"; };
 		CDFB89261EB4F5C700EA0CBE /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,14 +155,17 @@
 		CD98E7211EB32849007DAD09 /* Master Bot */ = {
 			isa = PBXGroup;
 			children = (
+				CDBE1FF91EB88E7F00D3A416 /* CoreDataClass */,
 				CD98E7221EB32849007DAD09 /* AppDelegate.swift */,
 				CD98E7261EB32849007DAD09 /* Main.storyboard */,
 				CD98E7241EB32849007DAD09 /* ViewController.swift */,
 				CD98E7531EB328DC007DAD09 /* ContentsController.swift */,
 				CDAEAC5D1EB7A71300E70D9F /* DataController.swift */,
+				CD1C49DA1EBA32FE00968193 /* RequestController.swift */,
 				CDFB89261EB4F5C700EA0CBE /* Content.swift */,
 				CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */,
 				CD98E72C1EB32849007DAD09 /* Assets.xcassets */,
+				CDBE201E1EB8F89D00D3A416 /* weather.xcassets */,
 				CD98E72E1EB32849007DAD09 /* LaunchScreen.storyboard */,
 				CD98E7311EB32849007DAD09 /* Info.plist */,
 				CD98E7291EB32849007DAD09 /* Master_Bot.xcdatamodeld */,
@@ -154,6 +189,19 @@
 				CD98E7471EB32849007DAD09 /* Info.plist */,
 			);
 			path = "Master BotUITests";
+			sourceTree = "<group>";
+		};
+		CDBE1FF91EB88E7F00D3A416 /* CoreDataClass */ = {
+			isa = PBXGroup;
+			children = (
+				CDBE20061EB8DEA100D3A416 /* ContentId+CoreDataClass.swift */,
+				CDBE20071EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift */,
+				CDBE20081EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift */,
+				CDBE20091EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift */,
+				CDBE200A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift */,
+				CDBE200B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift */,
+			);
+			name = CoreDataClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBE201F1EB8F89D00D3A416 /* weather.xcassets in Resources */,
 				CD98E7301EB32849007DAD09 /* LaunchScreen.storyboard in Resources */,
 				CD98E72D1EB32849007DAD09 /* Assets.xcassets in Resources */,
 				CD98E7281EB32849007DAD09 /* Main.storyboard in Resources */,
@@ -278,6 +327,7 @@
 			files = (
 				CDAEAC691EB7AD4C00E70D9F /* Assets.xcassets in Resources */,
 				CDAEAC631EB7AD3D00E70D9F /* Main.storyboard in Resources */,
+				CDBE20201EB8F89D00D3A416 /* weather.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +337,7 @@
 			files = (
 				CDAEAC6A1EB7AD4C00E70D9F /* Assets.xcassets in Resources */,
 				CDAEAC641EB7AD3D00E70D9F /* Main.storyboard in Resources */,
+				CDBE20211EB8F89D00D3A416 /* weather.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,13 +348,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBE20181EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */,
 				CDAEAC5E1EB7A71300E70D9F /* DataController.swift in Sources */,
 				CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */,
 				CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */,
+				CDBE20121EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */,
+				CDBE200F1EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */,
 				CD98E7251EB32849007DAD09 /* ViewController.swift in Sources */,
+				CDBE200C1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */,
+				CDBE20151EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */,
 				CD98E7541EB328DC007DAD09 /* ContentsController.swift in Sources */,
 				CD98E7231EB32849007DAD09 /* AppDelegate.swift in Sources */,
+				CD1C49DB1EBA32FE00968193 /* RequestController.swift in Sources */,
 				CD98E72B1EB32849007DAD09 /* Master_Bot.xcdatamodeld in Sources */,
+				CDBE201B1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,13 +369,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBE20191EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */,
 				CDAEAC611EB7AD3800E70D9F /* ViewController.swift in Sources */,
 				CDAEAC651EB7AD4200E70D9F /* DataController.swift in Sources */,
 				CDAEAC5F1EB7AD2C00E70D9F /* AppDelegate.swift in Sources */,
+				CDBE20131EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */,
+				CDBE20101EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */,
 				CD98E73B1EB32849007DAD09 /* Master_BotTests.swift in Sources */,
+				CDBE200D1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */,
+				CDBE20161EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */,
 				CD98E7551EB328DC007DAD09 /* ContentsController.swift in Sources */,
 				CDAEAC671EB7AD4700E70D9F /* SuggestionBarView.swift in Sources */,
+				CD1C49DC1EBA32FE00968193 /* RequestController.swift in Sources */,
 				CDFB89281EB4F5C700EA0CBE /* Content.swift in Sources */,
+				CDBE201C1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,13 +390,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBE201A1EB8DEA100D3A416 /* ContentConstraint+CoreDataClass.swift in Sources */,
 				CDAEAC621EB7AD3800E70D9F /* ViewController.swift in Sources */,
 				CDAEAC661EB7AD4300E70D9F /* DataController.swift in Sources */,
 				CDAEAC601EB7AD2C00E70D9F /* AppDelegate.swift in Sources */,
+				CDBE20141EB8DEA100D3A416 /* ContentSubview+CoreDataClass.swift in Sources */,
+				CDBE20111EB8DEA100D3A416 /* ContentId+CoreDataProperties.swift in Sources */,
 				CD98E7461EB32849007DAD09 /* Master_BotUITests.swift in Sources */,
+				CDBE200E1EB8DEA100D3A416 /* ContentId+CoreDataClass.swift in Sources */,
+				CDBE20171EB8DEA100D3A416 /* ContentSubview+CoreDataProperties.swift in Sources */,
 				CD98E7561EB328DC007DAD09 /* ContentsController.swift in Sources */,
 				CDAEAC681EB7AD4800E70D9F /* SuggestionBarView.swift in Sources */,
+				CD1C49DD1EBA32FE00968193 /* RequestController.swift in Sources */,
 				CDFB89291EB4F5C700EA0CBE /* Content.swift in Sources */,
+				CDBE201D1EB8DEA100D3A416 /* ContentConstraint+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

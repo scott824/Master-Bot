@@ -19,11 +19,10 @@ import UIKit
 class ViewController: UIViewController, SuggestionBarDelegate {
     
     // ContentsController
-    var contentsContainView: ContentsController! = nil
+    var ContentsContainView: ContentsController! = nil
     
     // SuggestionBar
     var suggestionBarView: SuggestionBarView! = nil
-    
     
     
     
@@ -88,8 +87,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         // segue to ContentsController
         if segue.identifier == "send" {
             NSLog("set destination")
-            contentsContainView = segue.destination as! ContentsController
-            contentsContainView.inputText = inputTextFieldValue
+            ContentsContainView = segue.destination as! ContentsController
         }
         
     }
@@ -128,7 +126,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     
     @IBAction func ClickSendButton(_ sender: Any) {
         NSLog("Click Send Button")
-        contentsContainView.inputText = inputTextFieldValue
+        ContentsContainView.inputText = inputTextFieldValue
         inputTextFieldValue = ""
         dismissKeyboard()
     }
