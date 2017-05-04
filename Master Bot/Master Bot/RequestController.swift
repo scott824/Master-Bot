@@ -44,7 +44,7 @@ class RequestController {
                     
                     var weather: String = (((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["sky"]?["code4hour"])!
                     weather.remove(at: weather.startIndex)
-                    var weatherImageName: String = weather.substring(from: weather.characters.index(of: "S")!).lowercased()
+                    let weatherImageName: String = weather.substring(from: weather.characters.index(of: "S")!).lowercased()
                     NSLog(weatherImageName)
                     let currentTemperature = ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["temperature"]?["temp4hour"]!
                     
@@ -54,10 +54,10 @@ class RequestController {
                     
                     contentInfo.subviews?[0].subviews?[0].image = UIImage(named: weatherImageName)
                     contentInfo.subviews?[0].subviews?[1].text = currentTemperature! + "도"
+                    
                     DispatchQueue.main.async {
                         self.delegate?.addContent(contentInfo: contentInfo)
                     }
-                    
                     
                 }catch let error as NSError{
                     print(error)

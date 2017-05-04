@@ -148,12 +148,9 @@ class ContentsController: UITableViewController, RequestControllerDelegate {
 //                                   Constraint("imageView", .height, "self", .height, multiplier: Double(ratio), constant: 0.0)]
             
             if var contentinfo = datacontroller?.getContentData(input: "날씨") {
-                contentinfo.subviews?[0].subviews?[0].image = #imageLiteral(resourceName: "s01")
                 let request = RequestController()
                 request.delegate = self
                 request.request(contentInfo: contentinfo)
-                //addContent(contentInfo: contentinfo)
-                //self.contents.append(contentinfo)
                 NSLog("append content to constents")
             }
             return
