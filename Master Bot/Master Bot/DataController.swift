@@ -40,7 +40,7 @@ class DataController {
     
     // get ContentInfo Object by input string
     func getContentData(input: String) -> ContentInfo? {
-        NSLog("Start getContentData")
+        
         var id: Int32? = nil
         
         for contentId in self.contentIds {
@@ -57,13 +57,11 @@ class DataController {
             return nil
         }
         
-        NSLog("id : " + String(describing: id))
         
         var subviews: [ContentSubview] = self.contentSubviews.filter() { subview in
             subview.id == id
         }
         
-        NSLog("subviews : " + String(describing: subviews))
         
         var constraints: [Constraint?] = self.contentConstraints.filter({ constraint in
             constraint.id == id
@@ -102,7 +100,8 @@ class DataController {
                     } else {
                         image = nil
                     }
-                    var subviewContentInfoForm = ContentInfo(name: name, type: type, text: subview.text, proportion: subview.proportion, image: image)
+                    let font = UIFont.systemFont(ofSize: CGFloat(subview.fontSize), weight: CGFloat(subview.fontWeight))
+                    var subviewContentInfoForm = ContentInfo(name: name, type: type, text: subview.text, font: font, proportion: subview.proportion, image: image)
                     setSubviewsAndConstraints(content: &subviewContentInfoForm)
                     if content.subviews != nil {
                         content.subviews? += [subviewContentInfoForm]
@@ -124,9 +123,9 @@ class DataController {
                 }
             }
         }
-        NSLog("setting before add subviews and constraints")
+        
         setSubviewsAndConstraints(content: &content)
-        NSLog(String(describing: content))
+        
         return content
     }
     
@@ -137,31 +136,44 @@ class DataController {
         save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.centerX.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: 0.0)
         save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: 0.0)
         save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.height.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.height.rawValue), multiplier: 0.0, constant: 200.0)
-        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 1.0, constant: -20.0)
+        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 0.8, constant: 0.0)
         
         save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.top.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.top.rawValue), multiplier: 1.0, constant: 10.0)
-        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.bottomMargin.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.bottomMargin.rawValue), multiplier: 1.0, constant: 10.0)
-        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.leading.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.leading.rawValue), multiplier: 1.0, constant: 10.0)
-        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.trailing.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.trailing.rawValue), multiplier: 1.0, constant: 10.0)
+        save(id: 1, item: "rootview", itemAttr: Int32(NSLayoutAttribute.bottom.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.bottom.rawValue), multiplier: 1.0, constant: -10.0)
         
         save(id: 1, name: "imageview", parentName: "rootview", type: Int32(ViewType.UIImageView.rawValue), imagePath: "weather")
-        save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.leading.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.leading.rawValue), multiplier: 1.0, constant: 20.0)
-        save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.top.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.top.rawValue), multiplier: 1.0, constant: 20.0)
+        save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.right.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: -20.0)
+        save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: -25.0)
         save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.height.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.height.rawValue), multiplier: 0.0, constant: 100.0)
         save(id: 1, item: "imageview", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 0.0, constant: 100.0)
         
-        save(id: 1, name: "wordlabel", parentName: "rootview", type: Int32(ViewType.UILabel.rawValue), text: "weather")
-        save(id: 1, item: "wordlabel", itemAttr: Int32(NSLayoutAttribute.top.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.top.rawValue), multiplier: 1.0, constant: 10.0)
-        save(id: 1, item: "wordlabel", itemAttr: Int32(NSLayoutAttribute.trailing.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.trailing.rawValue), multiplier: 1.0, constant: -30.0)
-        save(id: 1, item: "wordlabel", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 0.0, constant: 100.0)
-        save(id: 1, item: "wordlabel", itemAttr: Int32(NSLayoutAttribute.height.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.height.rawValue), multiplier: 0.0, constant: 30.0)
+        save(id: 1, name: "currenttemperaturelabel", parentName: "rootview", type: Int32(ViewType.UILabel.rawValue), text: "weather", fontSize: 50, fontWeight: Double(UIFontWeightUltraLight))
+        save(id: 1, item: "currenttemperaturelabel", itemAttr: Int32(NSLayoutAttribute.bottom.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: -20.0)
+        save(id: 1, item: "currenttemperaturelabel", itemAttr: Int32(NSLayoutAttribute.left.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: 20.0)
+        
+        save(id: 1, name: "weathernamelabel", parentName: "rootview", type: Int32(ViewType.UILabel.rawValue), text: "weather",  fontSize: 40, fontWeight: Double(UIFontWeightUltraLight))
+        save(id: 1, item: "weathernamelabel", itemAttr: Int32(NSLayoutAttribute.top.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: -20.0)
+        save(id: 1, item: "weathernamelabel", itemAttr: Int32(NSLayoutAttribute.left.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: 20.0)
+        
+        save(id: 1, name: "horizontalline", parentName: "rootview", type: Int32(ViewType.UIView.rawValue))
+        save(id: 1, item: "horizontalline", itemAttr: Int32(NSLayoutAttribute.height.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.height.rawValue), multiplier: 0.0, constant: 1.0)
+        save(id: 1, item: "horizontalline", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 0.8, constant: 0.0)
+        save(id: 1, item: "horizontalline", itemAttr: Int32(NSLayoutAttribute.centerX.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: 0.0)
+        save(id: 1, item: "horizontalline", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: 50.0)
         
         
-//        save(id: 1, name: "imageView", parentName: "self", type: Int32(ViewType.UIImageView.rawValue), imagePath: "todayweather")
-//        save(id: 1, item: "imageView", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: 0.0)
-//        save(id: 1, item: "imageView", itemAttr: Int32(NSLayoutAttribute.centerX.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.centerX.rawValue), multiplier: 1.0, constant: 0.0)
-//        save(id: 1, item: "imageView", itemAttr: Int32(NSLayoutAttribute.width.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.width.rawValue), multiplier: 1.0, constant: 0.0)
-//        save(id: 1, item: "imageView", itemAttr: Int32(NSLayoutAttribute.height.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.height.rawValue), multiplier: 1.0, constant: 0.0)
+        save(id: 0, name: "sendMessage")
+        
+        save(id: 0, name: "rootview", parentName: "self", type: Int32(ViewType.UIView.rawValue))
+        save(id: 0, item: "rootview", itemAttr: Int32(NSLayoutAttribute.right.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.right.rawValue), multiplier: 1.0, constant: -10.0)
+        save(id: 0, item: "rootview", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "self", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: 0.0)
+        
+        save(id: 0, name: "talklabel", parentName: "rootview", type: Int32(ViewType.UILabel.rawValue), text: "talk", fontSize: 25, fontWeight: Double(UIFontWeightThin))
+        save(id: 0, item: "talklabel", itemAttr: Int32(NSLayoutAttribute.right.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.right.rawValue), multiplier: 1.0, constant: -5.0)
+        save(id: 0, item: "talklabel", itemAttr: Int32(NSLayoutAttribute.left.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.left.rawValue), multiplier: 1.0, constant: 0.0)
+        save(id: 0, item: "talklabel", itemAttr: Int32(NSLayoutAttribute.top.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.top.rawValue), multiplier: 1.0, constant: 0.0)
+        save(id: 0, item: "talklabel", itemAttr: Int32(NSLayoutAttribute.bottom.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.bottom.rawValue), multiplier: 1.0, constant: 0.0)
+        save(id: 0, item: "talklabel", itemAttr: Int32(NSLayoutAttribute.centerY.rawValue), toItem: "rootview", toItemAttr: Int32(NSLayoutAttribute.centerY.rawValue), multiplier: 1.0, constant: 0.0)
         
     }
     
@@ -181,8 +193,23 @@ class DataController {
         appdelegate?.saveContext()
     }
     
-    // save content subview
-    func save(id: Int, name: String, parentName: String, type: Int32, text: String? = nil, proportion: Double? = nil, imagePath: String? = nil) {
+    
+    /**
+     save content subview
+     
+     - parameters:
+        - id: id of content form
+        - name: view name
+        - parentName: parent view name
+        - type: UI's type
+        - text: for lebel, button
+        - fontSize: for label
+        - fontWeight: for label
+        - proportion: for progress, slider
+        - imagePath: for image view
+     
+    */
+    func save(id: Int, name: String, parentName: String, type: Int32, text: String? = nil, fontSize: Double? = nil, fontWeight: Double? = nil, proportion: Double? = nil, imagePath: String? = nil) {
         guard let context = self.appdelegate?.persistentContainer.viewContext else {
             return
         }
@@ -193,6 +220,10 @@ class DataController {
         contentsubview.parentName = parentName
         contentsubview.type = type
         contentsubview.text = text
+        if let fontSize = fontSize, let fontWeight = fontWeight {
+            contentsubview.fontSize = fontSize
+            contentsubview.fontWeight = fontWeight
+        }
         if let proportion = proportion {
             contentsubview.proportion = proportion
         }
@@ -201,8 +232,20 @@ class DataController {
         self.contentSubviews += [contentsubview]
         appdelegate?.saveContext()
     }
+    
    
-    // save content constraint
+    /**
+     save content constraint
+     
+     - parameters:
+        - id: id of content form
+        - item
+        - itemAttr
+        - toItem
+        - toItemAttr
+        - multiplier
+        - constant
+    */
     func save(id: Int, item: String, itemAttr: Int32, toItem: String, toItemAttr: Int32, multiplier: Double, constant: Double) {
         guard let context = self.appdelegate?.persistentContainer.viewContext else {
             return
@@ -220,6 +263,7 @@ class DataController {
         self.contentConstraints += [contentconstraint]
         appdelegate?.saveContext()
     }
+    
     
     // delete all the data from core data
     func deleteAll() {

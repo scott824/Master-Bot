@@ -2,7 +2,7 @@
 //  ContentSubview+CoreDataProperties.swift
 //  Master Bot
 //
-//  Created by Sang Chul Lee on 2017. 5. 3..
+//  Created by Sang Chul Lee on 2017. 5. 5..
 //  Copyright © 2017년 SC_production. All rights reserved.
 //
 
@@ -23,5 +23,7 @@ extension ContentSubview {
     @NSManaged public var proportion: Double
     @NSManaged public var text: String?
     @NSManaged public var type: Int32
+    @NSManaged public var fontSize: Double
+    @NSManaged public var fontWeight: Double
 
 }

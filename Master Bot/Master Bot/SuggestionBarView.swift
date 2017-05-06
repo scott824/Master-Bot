@@ -12,13 +12,13 @@ protocol SuggestionBarDelegate {
     var inputTextFieldValue: String {get set}
 }
 
-class SuggestionBarView: UIView {
+class SuggestionBarView: UIScrollView {
     
-    var delegate: SuggestionBarDelegate?    // ViewController
+    var viewController: SuggestionBarDelegate?    // ViewController
     let BarHeight = 50.0
     var elements: [UIButton] = []
+    var barlength: CGFloat = 0.0
 
-    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -29,16 +29,21 @@ class SuggestionBarView: UIView {
         addElement(image: #imageLiteral(resourceName: "pizza"), name: "피자")
         addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
         addElement(image: #imageLiteral(resourceName: "bus"), name: "버스")
+        addElement(image: #imageLiteral(resourceName: "subway"), name: "지하철")
+        self.contentSize = CGSize(width: barlength, height: 50)
+        self.showsHorizontalScrollIndicator = false
     }
     
     // input string from InputTextFeild
     // TODO: 문자열 분석 알고리즘 필요 -> plist로 구현
     func search(input: String) {
+        barlength = 0.0
         if input == "" {
             removeAllElements()
             addElement(image: #imageLiteral(resourceName: "pizza"), name: "피자")
             addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
             addElement(image: #imageLiteral(resourceName: "bus"), name: "버스")
+            addElement(image: #imageLiteral(resourceName: "subway"), name: "지하철")
         }
         else if input.contains("피자") {
             removeAllElements()
@@ -70,6 +75,9 @@ class SuggestionBarView: UIView {
             removeAllElements()
             addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
         }
+        
+        NSLog("Bar Length: " + String(describing: barlength))
+        self.contentSize = CGSize(width: barlength, height: 50)
     }
     
     // Add suggestion element
@@ -126,8 +134,8 @@ class SuggestionBarView: UIView {
         } else {
             elementLeftConstraint = makeConstraint(element, .left, self, .left, constant: marginBetweenElements)
         }
-        
-        let elementWidthConstraint = makeConstraint(element, .width, constant: Double(imageView.layoutMargins.left + label.frame.width) + Double(imageView.frame.width) * imageViewDownSizeRatio + Double(marginBetweenImageLabel))
+        let elementWidth = Double(imageView.layoutMargins.left + label.frame.width) + Double(imageView.frame.width) * imageViewDownSizeRatio + Double(marginBetweenImageLabel)
+        let elementWidthConstraint = makeConstraint(element, .width, constant: elementWidth)
         let elementHeightConstraint = makeConstraint(element, .height, constant: BarHeight)
         let elementPositionConstraint = makeConstraint(element, .centerY, self, .centerY)
         
@@ -135,7 +143,7 @@ class SuggestionBarView: UIView {
         
         
         // borders for debug
-        let borderWidth: CGFloat = 1
+        let borderWidth: CGFloat = 0
         
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.borderWidth = borderWidth
@@ -153,6 +161,9 @@ class SuggestionBarView: UIView {
         
         // Add element to elements array
         elements += [element]
+        
+        NSLog("element frame width: " + String(describing: element.frame.width))
+        barlength += CGFloat(elementWidth) + CGFloat(marginBetweenElements)
     }
     
     // remove all the elements from elements
@@ -176,19 +187,19 @@ class SuggestionBarView: UIView {
         button.backgroundColor = UIColor.white
         
         if let text = (button.subviews.last as! UILabel).text {
-            if let input = delegate?.inputTextFieldValue {
+            if let input = viewController?.inputTextFieldValue {
                 if let lastWord = input.components(separatedBy: " ").last {
                     if lastWord != "" && text.contains(lastWord) {
-                        if let range = delegate?.inputTextFieldValue.range(of: lastWord) {
-                            delegate?.inputTextFieldValue.removeSubrange(range)
-                            if delegate?.inputTextFieldValue.characters.last == " " {
-                                if let lastindex = delegate?.inputTextFieldValue.endIndex {
-                                    delegate?.inputTextFieldValue.remove(at: lastindex)
+                        if let range = viewController?.inputTextFieldValue.range(of: lastWord) {
+                            viewController?.inputTextFieldValue.removeSubrange(range)
+                            if viewController?.inputTextFieldValue.characters.last == " " {
+                                if let lastindex = viewController?.inputTextFieldValue.endIndex {
+                                    viewController?.inputTextFieldValue.remove(at: lastindex)
                                 }
                             }
                         }
                     }
-                    delegate?.inputTextFieldValue += " " + text
+                    viewController?.inputTextFieldValue += " " + text
                 }
             }
         }

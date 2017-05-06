@@ -109,13 +109,15 @@ class ContentsController: UITableViewController, RequestControllerDelegate {
         cell.setContent(contentInfo: content)
     }
     
+    // add content card to table
     func addContent(contentInfo: ContentInfo) {
+        
         self.contents.append(contentInfo)
         NSLog("Begin Update")
         
         // Add row
         ContentsTableView?.beginUpdates()
-        ContentsTableView?.insertRows(at: [IndexPath(row: contents.endIndex-1, section: 0)], with: .automatic)
+        ContentsTableView?.insertRows(at: [IndexPath(row: contents.endIndex-1, section: 0)], with: .bottom)
         ContentsTableView?.endUpdates()
         
         NSLog("End Update")
@@ -133,59 +135,21 @@ class ContentsController: UITableViewController, RequestControllerDelegate {
             return
         }
         
+        if let contentinfo = datacontroller?.getContentData(input: "sendMessage") {
+            contentinfo.subviews?[0].subviews?[0].text = inputText
+            addContent(contentInfo: contentinfo)
+        }
+        
         NSLog("Make Content : " + inputText)
         
-        var content = ContentInfo(name: "self", type: .content)
-        
         if inputText.contains("날씨") {
-            //var id = contentId[0].value(forKey: "id") as? Int
-//            let image = #imageLiteral(resourceName: "todayweather")
-//            let ratio = image.size.height / image.size.width
-//            content.subviews = [ContentInfo(name: "imageView", type: .UIImageView, image: image)]
-//            content.constraints = [Constraint("imageView", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0),
-//                                   Constraint("imageView", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0),
-//                                   Constraint("imageView", .width, "self", .width, multiplier: 1.0, constant: 0.0),
-//                                   Constraint("imageView", .height, "self", .height, multiplier: Double(ratio), constant: 0.0)]
-            
-            if var contentinfo = datacontroller?.getContentData(input: "날씨") {
+            if let contentinfo = datacontroller?.getContentData(input: "날씨") {
                 let request = RequestController()
                 request.delegate = self
                 request.request(contentInfo: contentinfo)
                 NSLog("append content to constents")
             }
-            return
         }
-        else if inputText.contains("id") {
-            NSLog("input: id")
-            var text = ""
-            if let contentIds = datacontroller?.contentIds {
-                NSLog("start loop")
-                for i in contentIds {
-                    NSLog("inside loop")
-                    if let name = i.name {
-                        text += String(i.id) + name
-                    }
-                }
-            }
-            NSLog("make text")
-            content.subviews = [ContentInfo(name: "label", type: .UILabel, text: text)]
-            content.constraints = [Constraint("label", .centerX, "self", .centerX, multiplier: 1.0, constant: 0.0),
-                                   Constraint("label", .centerY, "self", .centerY, multiplier: 1.0, constant: 0.0),
-                                   Constraint("label", .width, "self", .width, multiplier: 1.0, constant: -20.0),
-                                   Constraint("label", .height, "self", .height, multiplier: 1.0, constant: -20.0)]
-        }
-        else if inputText.contains("delete") {
-            datacontroller?.deleteAll()
-        }
-        else if inputText.contains("firstdata") {
-            datacontroller?.firstData()
-        }
-        else {
-            var str = inputText.components(separatedBy: " ")
-            datacontroller?.save(id: Int(str[0])!, name: str[1])
-        }
-        
-        self.contents.append(content)
     }
     
 

@@ -9,17 +9,19 @@
 import UIKit
 
 
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Main View Controller
-//
-////////////////////////////////////////////////////////////////////////////////
+/**
+ 
+ Root View Controller - include InputView, SuggestionBarView, ContentsController
+ 
+ - Author: Sangchul Lee
+ 
+*/
 
 
 class ViewController: UIViewController, SuggestionBarDelegate {
     
     // ContentsController
-    var ContentsContainView: ContentsController! = nil
+    var contentsController: ContentsController! = nil
     
     // SuggestionBar
     var suggestionBarView: SuggestionBarView! = nil
@@ -63,8 +65,8 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         // display recommendation depends on words user write
-        suggestionBarView = SuggestionBarView(frame: CGRect(x: 0, y: 0, width: 640, height: 50))
-        suggestionBarView.delegate = self
+        suggestionBarView = SuggestionBarView(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
+        suggestionBarView.viewController = self
         suggestionBarView.backgroundColor = UIColor.white
         InputTextField.inputAccessoryView = suggestionBarView
         
@@ -87,7 +89,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         // segue to ContentsController
         if segue.identifier == "send" {
             NSLog("set destination")
-            ContentsContainView = segue.destination as! ContentsController
+            contentsController = segue.destination as! ContentsController
         }
         
     }
@@ -120,13 +122,14 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         searchByInputText()
     }
     
+    // search suggestion words in suggestion bar
     func searchByInputText() {
         suggestionBarView.search(input: inputTextFieldValue)
     }
     
     @IBAction func ClickSendButton(_ sender: Any) {
         NSLog("Click Send Button")
-        ContentsContainView.inputText = inputTextFieldValue
+        contentsController.inputText = inputTextFieldValue
         inputTextFieldValue = ""
         dismissKeyboard()
     }

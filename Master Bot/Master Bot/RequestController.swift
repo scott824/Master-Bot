@@ -19,12 +19,10 @@ class RequestController {
     var delegate: ContentsController?
     
     init() {
-        NSLog("request controller!!")
+        
     }
     
     func request(contentInfo: ContentInfo) {
-        var contentInfo = contentInfo
-        NSLog("REQUEST!!!")
         var request = URLRequest(url: URL(string: "http://lionbot.net/weather")!)
         request.httpMethod = "GET"
         let session = URLSession.shared
@@ -33,36 +31,73 @@ class RequestController {
             print(String(describing: data) + String(describing: response))
             if(error != nil){
                 print("error")
-            }else{
+            } else {
                 do{
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String:Any]
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
                     
-                    print(String(describing: ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["sky"]?["code4hour"]))
-                    print(String(describing: ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["temperature"]?["temp4hour"]))
-                    print(String(describing: (((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcstdaily"] as! [String:[String:String]])["temperature"]?["tmax1day"])))
-                    print(String(describing: ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcstdaily"] as! [String:[String:String]])["temperature"]?["tmin1day"]))
+                    let jsonDic = jsonToDic(json: json)
                     
-                    var weather: String = (((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["sky"]?["code4hour"])!
-                    weather.remove(at: weather.startIndex)
-                    let weatherImageName: String = weather.substring(from: weather.characters.index(of: "S")!).lowercased()
-                    NSLog(weatherImageName)
-                    let currentTemperature = ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcst3hour"] as! [String:[String:String]])["temperature"]?["temp4hour"]!
+                    var weatherImageName: String!
+                    var weatherName: String!
+                    var currentTemperature: String!
+                    var highestTemperature: String!
+                    var lowestTemperature: String!
                     
-                    let highestTemperature = ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcstdaily"] as! [String:[String:String]])["temperature"]?["tmax1day"]!
-                    
-                    let lowestTemperature = ((((json["weather"] as! [String:Any])["forecast3days"] as! [Any])[0] as! [String:Any])["fcstdaily"] as! [String:[String:String]])["temperature"]?["tmin1day"]!
+                    if let code4hour = jsonDic["code4hour"],
+                       let name4hour = jsonDic["name4hour"],
+                       let temp4hour = jsonDic["temp4hour"],
+                       let tmax1day = jsonDic["tmax1day"],
+                       let tmin1day = jsonDic["tmin1day"] {
+                        weatherImageName = code4hour
+                        weatherName = name4hour
+                        currentTemperature = temp4hour
+                        highestTemperature = tmax1day
+                        lowestTemperature = tmin1day
+                    }
                     
                     contentInfo.subviews?[0].subviews?[0].image = UIImage(named: weatherImageName)
-                    contentInfo.subviews?[0].subviews?[1].text = currentTemperature! + "도"
+                    contentInfo.subviews?[0].subviews?[1].text = currentTemperature!.components(separatedBy: ".")[0] + "˚"
+                    contentInfo.subviews?[0].subviews?[2].text = weatherName
+                    
                     
                     DispatchQueue.main.async {
                         self.delegate?.addContent(contentInfo: contentInfo)
                     }
                     
-                }catch let error as NSError{
+                } catch let error as NSError {
                     print(error)
                 }
             }
         }.resume()
     }
+}
+
+
+
+func jsonToDic(json: NSDictionary) -> [String:String] {
+    var jsonDic: NSMutableDictionary = [:]
+    
+    func parseJson(_ json: NSDictionary) {
+        for element in json {
+            if json[element.key] is String? {
+                jsonDic[element.key] = (json[element.key] as! String)
+            }
+            else if json[element.key] is NSNumber {
+                jsonDic[element.key] = String(json[element.key] as! Double)
+            }
+            else if json[element.key] is [Any] {
+                for i in (json[element.key] as! [Any]) {
+                    parseJson(i as! NSDictionary)
+                }
+            }
+            else if json[element.key] is [String:Any] {
+                parseJson(json[element.key] as! NSDictionary)
+            }
+            else {
+                print(String(describing: element))
+            }
+        }
+    }
+    parseJson(json)
+    return jsonDic as! [String:String]
 }

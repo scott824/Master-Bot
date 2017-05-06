@@ -14,6 +14,8 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ContentSubview" representedClassName=".ContentSubview" syncable="YES">
+        <attribute name="fontSize" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fontWeight" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -25,6 +27,6 @@
     <elements>
         <element name="ContentConstraint" positionX="171" positionY="-105" width="128" height="150"/>
         <element name="ContentId" positionX="-198" positionY="-72" width="128" height="75"/>
-        <element name="ContentSubview" positionX="-20" positionY="69" width="128" height="150"/>
+        <element name="ContentSubview" positionX="-20" positionY="69" width="128" height="180"/>
     </elements>
 </model>

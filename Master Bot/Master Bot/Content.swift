@@ -14,22 +14,28 @@ import UIKit
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-struct ContentInfo {
+class ContentInfo {
     var name: String
     var type: ViewType
     
     var subviews: [ContentInfo]?
     var constraints: [Constraint]?
+    var actions: [(() -> ())]?
     
     // configure of view
+    var cornerRadius: CGFloat?
+    var borderWidth: CGFloat?
+    var borderColor: CGColor?
     var text: String?
+    var font: UIFont?
     var proportion: Double?
     var image: UIImage?
     
-    init(name: String, type: ViewType, text: String? = nil, proportion: Double? = nil, image: UIImage? = nil) {
+    init(name: String, type: ViewType, text: String? = nil, font: UIFont? = nil, proportion: Double? = nil, image: UIImage? = nil) {
         self.name = name
         self.type = type
         self.text = text
+        self.font = font
         self.proportion = proportion
         self.image = image
     }
@@ -73,8 +79,8 @@ class Content: UITableViewCell {
         super.awakeFromNib()
         
         // border for debug
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.gray.cgColor
+        //self.layer.borderWidth = 1
+        //self.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -115,7 +121,6 @@ class Content: UITableViewCell {
         if let constraintsInfo = contentInfo.constraints {
             var constraints: [NSLayoutConstraint] = []
             for constraint in constraintsInfo {
-                NSLog("\(constraint.item) \(constraint.itemAttr) \(constraint.toItem) \(constraint.toItemAttr)")
                 if let item = _subviews[constraint.item], let toItem = _subviews[constraint.toItem] {
                     constraints.append(makeConstraint(item, constraint.itemAttr, toItem, constraint.toItemAttr, mutiplier: constraint.multiplier, constant: constraint.constant))
                 }
@@ -131,10 +136,18 @@ class Content: UITableViewCell {
         switch contentInfo.type {
         case .UIView:
             view = UIView()
+            (view as! UIView).backgroundColor = UIColor.white
+            (view as! UIView).layer.cornerRadius = 10
+            (view as! UIView).layer.borderColor = UIColor.gray.cgColor
+            (view as! UIView).layer.borderWidth = 1
         case .UILabel:
             NSLog("make label")
             view = UILabel()
             (view as! UILabel).text = contentInfo.text
+            //(view as! UILabel).font = UIFont.systemFont(ofSize: 50, weight: UIFontWeightUltraLight)
+            (view as! UILabel).font = contentInfo.font
+            (view as! UILabel).sizeToFit()
+            //(view as! UILabel).adjustsFontSizeToFitWidth = true
         case .UIImageView:
             NSLog("make image view")
             view = UIImageView()
@@ -146,8 +159,8 @@ class Content: UITableViewCell {
             break
         }
         
-        (view as! UIView).layer.borderColor = UIColor.gray.cgColor
-        (view as! UIView).layer.borderWidth = 1
+        //(view as! UIView).layer.borderColor = UIColor.gray.cgColor
+        //(view as! UIView).layer.borderWidth = 1
         
         return view
     }

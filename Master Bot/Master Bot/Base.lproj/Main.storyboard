@@ -90,7 +90,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ApplicationView" destination="8bC-Xf-vdC" id="ICs-Re-21w"/>
-                        <outlet property="ContentsContainView" destination="VUu-VG-HOS" id="qkP-0a-PVd"/>
                         <outlet property="ContentsInputView" destination="iU4-0n-7mb" id="PfR-fR-5KA"/>
                         <outlet property="ContentsInputViewBottomConstraint" destination="sUU-zW-Ns9" id="v6c-Za-NCE"/>
                         <outlet property="ContentsTableContainer" destination="VUu-VG-HOS" id="c4m-5p-TQN"/>
@@ -112,7 +111,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="0mF-UF-Ken" customClass="Content" customModule="Master_Bot" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="0mF-UF-Ken" customClass="Content" customModule="Master_Bot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0mF-UF-Ken" id="c5n-hr-hRV">
