@@ -22,6 +22,37 @@ class RequestController {
         
     }
     
+    func request(url: String, callback: @escaping ([String:String]) -> Void) {
+        NSLog("request by url and callback")
+        var request: URLRequest?
+        if let url = URL(string: url) {
+            request = URLRequest(url: url)
+            request?.httpMethod = "GET"
+        }
+        let session = URLSession.shared
+        
+        guard let req = request else {
+            return
+        }
+        
+        session.dataTask(with: req) { data, response, error in
+            if error == nil {
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! NSDictionary
+                    
+                    let jsonDic = jsonToDic(json: json)
+                    
+                    callback(jsonDic)
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+            } else {
+                NSLog("Error while request")
+            }
+        }.resume()
+    }
+    
     func request(contentInfo: ContentInfo) {
         var request = URLRequest(url: URL(string: "http://lionbot.net/weather")!)
         request.httpMethod = "GET"

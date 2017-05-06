@@ -15,7 +15,7 @@ import CoreData
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-class ContentsController: UITableViewController, RequestControllerDelegate {
+class ContentsController: UITableViewController, RequestControllerDelegate, ContentInContents {
     
     var datacontroller: DataController?
     
@@ -107,6 +107,7 @@ class ContentsController: UITableViewController, RequestControllerDelegate {
         NSLog("Set Cell at row " + String(index))
         let content = self.contents[index]
         cell.setContent(contentInfo: content)
+        cell.tableviewcontroller = self
     }
     
     // add content card to table
@@ -150,6 +151,15 @@ class ContentsController: UITableViewController, RequestControllerDelegate {
                 NSLog("append content to constents")
             }
         }
+    }
+    
+    func reload(cell: Content) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        self.tableView.reloadRows(at: [indexPath!], with: UITableViewRowAnimation.none)
+    }
+    
+    func index(cell: Content) -> Int {
+        return (self.tableView.indexPath(for: cell)?.row)!
     }
     
 

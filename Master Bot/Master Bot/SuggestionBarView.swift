@@ -26,6 +26,7 @@ class SuggestionBarView: UIScrollView {
         
         // Drawing code
         // TODO: 초기화 부분 필요 -> 서치 알고리즘 초기화 기존 정보들 가져오기
+        removeAllElements()
         addElement(image: #imageLiteral(resourceName: "pizza"), name: "피자")
         addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
         addElement(image: #imageLiteral(resourceName: "bus"), name: "버스")
