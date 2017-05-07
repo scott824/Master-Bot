@@ -29,7 +29,7 @@
 		CD3E272D1EBC626A00327F08 /* ContentId+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E271C1EBC626A00327F08 /* ContentId+CoreDataProperties.swift */; };
 		CD3E272E1EBC626A00327F08 /* ContentId+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E271C1EBC626A00327F08 /* ContentId+CoreDataProperties.swift */; };
 		CD98E7231EB32849007DAD09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7221EB32849007DAD09 /* AppDelegate.swift */; };
-		CD98E7251EB32849007DAD09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* ViewController.swift */; };
+		CD98E7251EB32849007DAD09 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* RootViewController.swift */; };
 		CD98E7281EB32849007DAD09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD98E7261EB32849007DAD09 /* Main.storyboard */; };
 		CD98E72B1EB32849007DAD09 /* Master_Bot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7291EB32849007DAD09 /* Master_Bot.xcdatamodeld */; };
 		CD98E72D1EB32849007DAD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD98E72C1EB32849007DAD09 /* Assets.xcassets */; };
@@ -42,8 +42,8 @@
 		CDAEAC5E1EB7A71300E70D9F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAEAC5D1EB7A71300E70D9F /* DataController.swift */; };
 		CDAEAC5F1EB7AD2C00E70D9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7221EB32849007DAD09 /* AppDelegate.swift */; };
 		CDAEAC601EB7AD2C00E70D9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7221EB32849007DAD09 /* AppDelegate.swift */; };
-		CDAEAC611EB7AD3800E70D9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* ViewController.swift */; };
-		CDAEAC621EB7AD3800E70D9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* ViewController.swift */; };
+		CDAEAC611EB7AD3800E70D9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* RootViewController.swift */; };
+		CDAEAC621EB7AD3800E70D9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD98E7241EB32849007DAD09 /* RootViewController.swift */; };
 		CDAEAC631EB7AD3D00E70D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD98E7261EB32849007DAD09 /* Main.storyboard */; };
 		CDAEAC641EB7AD3D00E70D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD98E7261EB32849007DAD09 /* Main.storyboard */; };
 		CDAEAC651EB7AD4200E70D9F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAEAC5D1EB7A71300E70D9F /* DataController.swift */; };
@@ -55,7 +55,13 @@
 		CDBE201F1EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
 		CDBE20201EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
 		CDBE20211EB8F89D00D3A416 /* weather.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBE201E1EB8F89D00D3A416 /* weather.xcassets */; };
+		CDD0D5701EBEFB22004DBA21 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D56F1EBEFB22004DBA21 /* NotificationController.swift */; };
+		CDD0D5711EBEFB22004DBA21 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D56F1EBEFB22004DBA21 /* NotificationController.swift */; };
+		CDD0D5721EBEFB22004DBA21 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD0D56F1EBEFB22004DBA21 /* NotificationController.swift */; };
 		CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */; };
+		CDF520881EBF7FD300DA9B74 /* ContentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF520871EBF7FD300DA9B74 /* ContentInfo.swift */; };
+		CDF520891EBF7FD300DA9B74 /* ContentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF520871EBF7FD300DA9B74 /* ContentInfo.swift */; };
+		CDF5208A1EBF7FD300DA9B74 /* ContentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF520871EBF7FD300DA9B74 /* ContentInfo.swift */; };
 		CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
 		CDFB89281EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
 		CDFB89291EB4F5C700EA0CBE /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB89261EB4F5C700EA0CBE /* Content.swift */; };
@@ -88,7 +94,7 @@
 		CD3E271C1EBC626A00327F08 /* ContentId+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentId+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD98E71F1EB32849007DAD09 /* Master Bot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Master Bot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD98E7221EB32849007DAD09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD98E7241EB32849007DAD09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD98E7241EB32849007DAD09 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		CD98E7271EB32849007DAD09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD98E72A1EB32849007DAD09 /* Master_Bot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Master_Bot.xcdatamodel; sourceTree = "<group>"; };
 		CD98E72C1EB32849007DAD09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +109,9 @@
 		CD98E7531EB328DC007DAD09 /* ContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentsController.swift; sourceTree = "<group>"; };
 		CDAEAC5D1EB7A71300E70D9F /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CDBE201E1EB8F89D00D3A416 /* weather.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = weather.xcassets; sourceTree = "<group>"; };
+		CDD0D56F1EBEFB22004DBA21 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionBarView.swift; sourceTree = "<group>"; };
+		CDF520871EBF7FD300DA9B74 /* ContentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentInfo.swift; sourceTree = "<group>"; };
 		CDFB89261EB4F5C700EA0CBE /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,12 +166,14 @@
 				CDBE1FF91EB88E7F00D3A416 /* CoreDataClass */,
 				CD98E7221EB32849007DAD09 /* AppDelegate.swift */,
 				CD98E7261EB32849007DAD09 /* Main.storyboard */,
-				CD98E7241EB32849007DAD09 /* ViewController.swift */,
+				CD98E7241EB32849007DAD09 /* RootViewController.swift */,
 				CDDDC9871EB3BA60005E13AE /* SuggestionBarView.swift */,
 				CD98E7531EB328DC007DAD09 /* ContentsController.swift */,
 				CDFB89261EB4F5C700EA0CBE /* Content.swift */,
+				CDF520871EBF7FD300DA9B74 /* ContentInfo.swift */,
 				CDAEAC5D1EB7A71300E70D9F /* DataController.swift */,
 				CD1C49DA1EBA32FE00968193 /* RequestController.swift */,
+				CDD0D56F1EBEFB22004DBA21 /* NotificationController.swift */,
 				CD98E72C1EB32849007DAD09 /* Assets.xcassets */,
 				CDBE201E1EB8F89D00D3A416 /* weather.xcassets */,
 				CD98E72E1EB32849007DAD09 /* LaunchScreen.storyboard */,
@@ -348,12 +358,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD0D5701EBEFB22004DBA21 /* NotificationController.swift in Sources */,
 				CD3E271D1EBC626A00327F08 /* ContentSubview+CoreDataClass.swift in Sources */,
 				CDAEAC5E1EB7A71300E70D9F /* DataController.swift in Sources */,
+				CDF520881EBF7FD300DA9B74 /* ContentInfo.swift in Sources */,
 				CDDDC9881EB3BA60005E13AE /* SuggestionBarView.swift in Sources */,
 				CDFB89271EB4F5C700EA0CBE /* Content.swift in Sources */,
 				CD3E272C1EBC626A00327F08 /* ContentId+CoreDataProperties.swift in Sources */,
-				CD98E7251EB32849007DAD09 /* ViewController.swift in Sources */,
+				CD98E7251EB32849007DAD09 /* RootViewController.swift in Sources */,
 				CD3E27201EBC626A00327F08 /* ContentSubview+CoreDataProperties.swift in Sources */,
 				CD98E7541EB328DC007DAD09 /* ContentsController.swift in Sources */,
 				CD98E7231EB32849007DAD09 /* AppDelegate.swift in Sources */,
@@ -369,8 +381,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD0D5711EBEFB22004DBA21 /* NotificationController.swift in Sources */,
 				CD3E271E1EBC626A00327F08 /* ContentSubview+CoreDataClass.swift in Sources */,
-				CDAEAC611EB7AD3800E70D9F /* ViewController.swift in Sources */,
+				CDAEAC611EB7AD3800E70D9F /* RootViewController.swift in Sources */,
+				CDF520891EBF7FD300DA9B74 /* ContentInfo.swift in Sources */,
 				CDAEAC651EB7AD4200E70D9F /* DataController.swift in Sources */,
 				CDAEAC5F1EB7AD2C00E70D9F /* AppDelegate.swift in Sources */,
 				CD3E272D1EBC626A00327F08 /* ContentId+CoreDataProperties.swift in Sources */,
@@ -390,8 +404,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD0D5721EBEFB22004DBA21 /* NotificationController.swift in Sources */,
 				CD3E271F1EBC626A00327F08 /* ContentSubview+CoreDataClass.swift in Sources */,
-				CDAEAC621EB7AD3800E70D9F /* ViewController.swift in Sources */,
+				CDAEAC621EB7AD3800E70D9F /* RootViewController.swift in Sources */,
+				CDF5208A1EBF7FD300DA9B74 /* ContentInfo.swift in Sources */,
 				CDAEAC661EB7AD4300E70D9F /* DataController.swift in Sources */,
 				CDAEAC601EB7AD2C00E70D9F /* AppDelegate.swift in Sources */,
 				CD3E272E1EBC626A00327F08 /* ContentId+CoreDataProperties.swift in Sources */,

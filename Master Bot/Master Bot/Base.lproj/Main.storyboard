@@ -9,25 +9,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Master_Bot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RootViewController" customModule="Master_Bot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Root View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iU4-0n-7mb" userLabel="ContentsInputView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iU4-0n-7mb" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUu-VG-HOS">
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUu-VG-HOS" userLabel="Contents Container View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                         <connections>
-                                            <segue destination="Wc3-jH-3U1" kind="embed" identifier="send" id="f1d-PX-43Q"/>
+                                            <segue destination="Wc3-jH-3U1" kind="embed" identifier="send" id="qLW-YL-ivV"/>
                                         </connections>
                                     </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agd-Lc-36l" userLabel="InputView">
@@ -39,7 +39,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <action selector="EditingInputTextValue:" destination="BYZ-38-t0r" eventType="editingChanged" id="X9x-r5-7G5"/>
+                                                    <action selector="EditingInputTextValue:" destination="BYZ-38-t0r" eventType="editingChanged" id="IV8-aE-wez"/>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM7-OS-iJq" userLabel="SendButton">
@@ -51,7 +51,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="ClickSendButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dsa-AT-HIi"/>
+                                                    <action selector="ClickSendButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gsm-iv-qfH"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -89,13 +89,13 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="ApplicationView" destination="8bC-Xf-vdC" id="ICs-Re-21w"/>
-                        <outlet property="ContentsInputView" destination="iU4-0n-7mb" id="PfR-fR-5KA"/>
-                        <outlet property="ContentsInputViewBottomConstraint" destination="sUU-zW-Ns9" id="v6c-Za-NCE"/>
-                        <outlet property="ContentsTableContainer" destination="VUu-VG-HOS" id="c4m-5p-TQN"/>
-                        <outlet property="InputTextField" destination="v4r-gi-lFA" id="sHT-14-frm"/>
-                        <outlet property="InputView" destination="Agd-Lc-36l" id="huc-sv-5xo"/>
-                        <outlet property="SendButton" destination="iM7-OS-iJq" id="jRW-MK-U9u"/>
+                        <outlet property="ContainerView" destination="iU4-0n-7mb" id="aTe-37-F3A"/>
+                        <outlet property="ContainerViewBottomConstraint" destination="sUU-zW-Ns9" id="qOT-pp-zSg"/>
+                        <outlet property="ContentsContainerView" destination="VUu-VG-HOS" id="noY-dK-FcE"/>
+                        <outlet property="InputTextField" destination="v4r-gi-lFA" id="GQA-Vw-hAB"/>
+                        <outlet property="InputView" destination="Agd-Lc-36l" id="TOl-6V-Rbs"/>
+                        <outlet property="RootView" destination="8bC-Xf-vdC" id="kOG-dT-9u5"/>
+                        <outlet property="SendButton" destination="iM7-OS-iJq" id="Blc-Jb-egs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -115,7 +115,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0mF-UF-Ken" id="c5n-hr-hRV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

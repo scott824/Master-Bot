@@ -8,83 +8,24 @@
 
 import UIKit
 
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Content structure
-//
-////////////////////////////////////////////////////////////////////////////////
 
-class ContentInfo {
-    var name: String
-    var type: ViewType
-    var removed: Bool = false
-    
-    var subviews: [ContentInfo]?
-    var constraints: [Constraint]?
-    var actions: [(() -> ())]?
-    
-    // configure of view
-    var cornerRadius: CGFloat?
-    var borderWidth: CGFloat?
-    var borderColor: CGColor?
-    
-    var text: String?
-    var font: UIFont?
-    var proportion: Double?
-    var image: UIImage?
-    
-    init(name: String, type: ViewType, text: String? = nil, font: UIFont? = nil, proportion: Double? = nil, image: UIImage? = nil) {
-        self.name = name
-        self.type = type
-        self.text = text
-        self.font = font
-        self.proportion = proportion
-        self.image = image
-    }
+protocol UpdateContent {
+    func reload(_ cell: Content)
+    func index(_ cell: Content) -> Int?
 }
 
-enum ViewType: Int32 {
-    case content = 0
-    case UIView = 1
-    case UIImageView = 2
-    case UILabel = 3
-    case UIButton = 4
-    case UIWebView = 5
-    case UIScrollView = 6
-    
-}
-
-class Constraint {
-    var item: String
-    var itemAttr: NSLayoutAttribute
-    var toItem: String
-    var toItemAttr: NSLayoutAttribute
-    var multiplier: Double
-    var constant: Double
-    
-    init(_ item: String, _ itemAttr: NSLayoutAttribute, _ toItem: String, _ toItemAttr:NSLayoutAttribute, multiplier: Double, constant: Double) {
-        self.item = item
-        self.itemAttr = itemAttr
-        self.toItem = toItem
-        self.toItemAttr = toItemAttr
-        self.multiplier = multiplier
-        self.constant = constant
-    }
-}
-
-protocol ContentInContents {
-    func reload(cell: Content)
-    func index(cell: Content) -> Int
-}
+/// *Content - Flexible Cell*
+///
+/// Flexible custom cell which set by `ContentInfo`
 
 class Content: UITableViewCell {
     
     var _subviews: [String:Any] = [:]
     var contentInfos: [ContentInfo] = []
     var constraintInfos: [Constraint] = []
-    var tableviewcontroller: ContentsController?
+    var tableviewcontroller: UpdateContent?
 
-    // Initialization code
+    /// Initialization code
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -99,6 +40,7 @@ class Content: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /// reset reusable cell
     func resetCell() {
         for subview in self.subviews {
             subview.removeFromSuperview()
@@ -108,6 +50,7 @@ class Content: UITableViewCell {
         constraintInfos = []
     }
     
+    /// set content(cell) by `ContentInfo`
     func setContent(contentInfo: ContentInfo, parent: UIView? = nil) {
         NSLog("Set content: " + contentInfo.name)
         
@@ -151,6 +94,7 @@ class Content: UITableViewCell {
         }
     }
     
+    /// get real View Object by `ContentInfo`
     func getViewObject(_ contentInfo: ContentInfo) -> Any {
         
         let view: Any!
@@ -208,9 +152,6 @@ class Content: UITableViewCell {
     }
     
     func buttonAction() {
-        NSLog("button action")
-        let index = tableviewcontroller?.index(cell: self)
-        
         modify(constraint: Constraint("rootview", .height, "self", .height, multiplier: 0.0, constant: 300.0))
         
         remove(subviewName: "detailbutton")
@@ -254,15 +195,16 @@ class Content: UITableViewCell {
                 self.add(constraint: Constraint(temp + "label", NSLayoutAttribute.width, code + "view", NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0))
             }
             DispatchQueue.main.async {
-                self.tableviewcontroller?.reload(cell: self)
+                self.tableviewcontroller?.reload(self)
             }
         })
     }
     
+    
+    /// modify constraint
     func modify(constraint: Constraint) {
         for i in self.constraintInfos {
             if i.item == constraint.item && i.itemAttr == constraint.itemAttr && i.toItem == constraint.toItem && i.toItemAttr == constraint.toItemAttr {
-                NSLog("modify constraint")
                 i.multiplier = constraint.multiplier
                 i.constant = constraint.constant
                 break
@@ -270,6 +212,7 @@ class Content: UITableViewCell {
         }
     }
     
+    /// add new constraint to ContentInfo in contents[index] in `ContentsController`
     func add(constraint: Constraint) {
         for i in self.contentInfos {
             if i.name == constraint.toItem {
@@ -283,6 +226,7 @@ class Content: UITableViewCell {
         }
     }
     
+    /// add new subview(ContentInfo) to ContentInfo in contents[index] in `ContentsController`
     func add(name: String, parentName: String, type: ViewType, text: String? = nil, fontSize: Double? = nil, fontWeight: CGFloat? = nil, proportion: Double? = nil, imagePath: String? = nil) {
         var font: UIFont?
         var image: UIImage?
@@ -308,6 +252,7 @@ class Content: UITableViewCell {
         }
     }
     
+    /// remove subview(ContentInfo) from ContentInfo in contents[index] in `ContentsController`
     func remove(subviewName: String) {
         for i in self.contentInfos {
             if i.name == subviewName {

@@ -12,13 +12,26 @@ protocol SuggestionBarDelegate {
     var inputTextFieldValue: String {get set}
 }
 
+/// *Suggestion Bar View*
+///
+/// Display suggestion words and autofill input text field
+///
+/// - Search segguestion words by input : `search(for: input)`
+/// - Set `InputTextField` value : `rootViewController?.InputTextFieldValue = setValue`
+
 class SuggestionBarView: UIScrollView {
     
-    var viewController: SuggestionBarDelegate?    // ViewController
-    let BarHeight = 50.0
+    /// Root View Controller
+    var rootViewController: SuggestionBarDelegate?
+    
+    /// suggestion words array
     var elements: [UIButton] = []
+    
+    let barHeight: Double = 50.0
     var barlength: CGFloat = 0.0
 
+    
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -26,19 +39,29 @@ class SuggestionBarView: UIScrollView {
         
         // Drawing code
         // TODO: 초기화 부분 필요 -> 서치 알고리즘 초기화 기존 정보들 가져오기
+        
         removeAllElements()
+        self.barlength = 0
         addElement(image: #imageLiteral(resourceName: "pizza"), name: "피자")
         addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
         addElement(image: #imageLiteral(resourceName: "bus"), name: "버스")
         addElement(image: #imageLiteral(resourceName: "subway"), name: "지하철")
         self.contentSize = CGSize(width: barlength, height: 50)
+        
+        // remove scroll bar
         self.showsHorizontalScrollIndicator = false
     }
     
-    // input string from InputTextFeild
-    // TODO: 문자열 분석 알고리즘 필요 -> plist로 구현
-    func search(input: String) {
+    
+    
+    /// search suggestion words by input
+    /// - TODO: 문자열 분석 알고리즘 필요(자연어 처리?)
+    func search(for input: String) {
+        
+        // initiate barlength
         barlength = 0.0
+        
+        // analyze input
         if input == "" {
             removeAllElements()
             addElement(image: #imageLiteral(resourceName: "pizza"), name: "피자")
@@ -77,11 +100,11 @@ class SuggestionBarView: UIScrollView {
             addElement(image: #imageLiteral(resourceName: "weather"), name: "날씨")
         }
         
-        NSLog("Bar Length: " + String(describing: barlength))
-        self.contentSize = CGSize(width: barlength, height: 50)
+        // set `SuggestionBarView`'s contentSize for scroll
+        self.contentSize = CGSize(width: barlength, height: CGFloat(barHeight))
     }
     
-    // Add suggestion element
+    /// Add suggestion element to `self`
     func addElement(image: UIImage? = nil, name: String) {
         let element = UIButton()
         let imageView = UIImageView(image: image)
@@ -137,7 +160,7 @@ class SuggestionBarView: UIScrollView {
         }
         let elementWidth = Double(imageView.layoutMargins.left + label.frame.width) + Double(imageView.frame.width) * imageViewDownSizeRatio + Double(marginBetweenImageLabel)
         let elementWidthConstraint = makeConstraint(element, .width, constant: elementWidth)
-        let elementHeightConstraint = makeConstraint(element, .height, constant: BarHeight)
+        let elementHeightConstraint = makeConstraint(element, .height, constant: barHeight)
         let elementPositionConstraint = makeConstraint(element, .centerY, self, .centerY)
         
         self.addConstraints([elementLeftConstraint, elementWidthConstraint, elementHeightConstraint, elementPositionConstraint])
@@ -155,19 +178,21 @@ class SuggestionBarView: UIScrollView {
         element.layer.borderColor = UIColor.gray.cgColor
         element.layer.borderWidth = borderWidth
         
+        
         // add Touch Event to element
         element.addTarget(self, action: #selector(self.elementTouchDownHandler(button:)), for: .touchDown)
         element.addTarget(self, action: #selector(self.elementTouchUpOutsideHandler(button:)), for: .touchUpOutside)
         element.addTarget(self, action: #selector(self.elementTouchUpInsideHandler(button:)), for: .touchUpInside)
         
+        
         // Add element to elements array
         elements += [element]
         
-        NSLog("element frame width: " + String(describing: element.frame.width))
+        // Add element width to barlength
         barlength += CGFloat(elementWidth) + CGFloat(marginBetweenElements)
     }
     
-    // remove all the elements from elements
+    /// remove all the elements
     func removeAllElements() {
         for element in elements {
             element.removeFromSuperview()
@@ -175,37 +200,47 @@ class SuggestionBarView: UIScrollView {
         elements = []
     }
     
-    // Touch Handler for elements
+    
+    
+//* Touch Handlers for elements *//
+    
+    /// Touch Down
     func elementTouchDownHandler(button: UIButton) {
         button.backgroundColor = UIColor.gray
     }
     
+    /// Touch Cancel
     func elementTouchUpOutsideHandler(button: UIButton) {
         button.backgroundColor = UIColor.white
     }
-    // TODO: 정리 필요!! - 텍스트의 자동완성된 부분을 수정해야함
+    
+    /// Click(select)
+    /// - TODO: 텍스트의 자동완성을 도와줘야 한다
     func elementTouchUpInsideHandler(button: UIButton) {
         button.backgroundColor = UIColor.white
         
         if let text = (button.subviews.last as! UILabel).text {
-            if let input = viewController?.inputTextFieldValue {
+            if let input = rootViewController?.inputTextFieldValue {
                 if let lastWord = input.components(separatedBy: " ").last {
                     if lastWord != "" && text.contains(lastWord) {
-                        if let range = viewController?.inputTextFieldValue.range(of: lastWord) {
-                            viewController?.inputTextFieldValue.removeSubrange(range)
-                            if viewController?.inputTextFieldValue.characters.last == " " {
-                                if let lastindex = viewController?.inputTextFieldValue.endIndex {
-                                    viewController?.inputTextFieldValue.remove(at: lastindex)
+                        if let range = rootViewController?.inputTextFieldValue.range(of: lastWord) {
+                            rootViewController?.inputTextFieldValue.removeSubrange(range)
+                            if rootViewController?.inputTextFieldValue.characters.last == " " {
+                                if let lastindex = rootViewController?.inputTextFieldValue.endIndex {
+                                    rootViewController?.inputTextFieldValue.remove(at: lastindex)
                                 }
                             }
                         }
                     }
-                    viewController?.inputTextFieldValue += " " + text
+                    rootViewController?.inputTextFieldValue += " " + text
                 }
             }
         }
     }
-    // make NSLayoutConstraint in short code
+    
+    
+    
+    /// make NSLayoutConstraint in short code
     func makeConstraint(_ item: Any, _ itemAttribute: NSLayoutAttribute, _ toItem: Any? = nil, _ toItemAttribute: NSLayoutAttribute = .notAnAttribute, mutiplier: Double = 1.0, constant: Double = 0.0) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: item, attribute: itemAttribute, relatedBy: .equal, toItem: toItem, attribute: toItemAttribute, multiplier: CGFloat(mutiplier), constant: CGFloat(constant))
     }

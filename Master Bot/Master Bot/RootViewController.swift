@@ -8,74 +8,70 @@
 
 import UIKit
 
-
-/**
- 
- Root View Controller - include InputView, SuggestionBarView, ContentsController
- 
- - Author: Sangchul Lee
- 
-*/
+protocol InputTextDelegate {
+    var inputText: String? {get set}
+}
 
 
-class ViewController: UIViewController, SuggestionBarDelegate {
+/// **Root View Controller**
+///
+/// Include `InputView`, `SuggestionBarView` and `ContentsController`
+///
+/// There are logics for:
+/// 1. Setting keyboard animation with `InputView` and `SuggestionBarView`
+/// 2. Intermediate `InputView` with `SuggestionBarView` by `SuggestionBarDelegate`
+/// 3. Send input value from `InputView` to `ContentsController`
+
+class RootViewController: UIViewController, SuggestionBarDelegate {
     
-    // ContentsController
-    var contentsController: ContentsController! = nil
+//* Included instances *//
     
-    // SuggestionBar
+    /// ContentsController instance
+    var contentsController: InputTextDelegate! = nil
+    
+    /// SuggestionBar instance
     var suggestionBarView: SuggestionBarView! = nil
     
     
     
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Outlet of Interface Builder
-//
-////////////////////////////////////////////////////////////////////////////////
+//* Outlets of Interface Builder *//
+
+    /// Root view outlet
+    @IBOutlet var RootView: UIView!
     
-    // Root view
-    @IBOutlet var ApplicationView: UIView!
+    /// wrapper view for ContentsContainerView and InputView
+    @IBOutlet weak var ContainerView: UIView!
+    @IBOutlet weak var ContainerViewBottomConstraint: NSLayoutConstraint!
     
-    // wrapper view for ContentsContainView and InputView
-    @IBOutlet weak var ContentsInputView: UIView!
-    @IBOutlet weak var ContentsInputViewBottomConstraint: NSLayoutConstraint!
+    /// contents container view
+    @IBOutlet weak var ContentsContainerView: UIView!
     
-    // contents table view (chat)
-    @IBOutlet weak var ContentsTableContainer: UIView!
-    
-    // bottom input view
+    /// input view which include `InputTextField` and `SendButton`
     @IBOutlet weak var InputView: UIView!
     @IBOutlet weak var InputTextField: UITextField!
     @IBOutlet weak var SendButton: UIButton!
     
     
     
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Override functions
-//      viewDidLoad() - initialization function of UIViewController
-//      didReceiveMemoryWarning()
-//      prepare() - for segue
-//
-////////////////////////////////////////////////////////////////////////////////
+//* Override functions *//
     
+    /// initialization function of Root View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // display recommendation depends on words user write
+        // display `SuggestionBarView` on top of the keyboard
         suggestionBarView = SuggestionBarView(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
-        suggestionBarView.viewController = self
+        suggestionBarView.rootViewController = self
         suggestionBarView.backgroundColor = UIColor.white
         InputTextField.inputAccessoryView = suggestionBarView
         
         // observer for keyboard layout
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.keyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.keyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         // hide keyboard if user tab other area
-        let tab = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        let tab = UITapGestureRecognizer(target: self, action: #selector(RootViewController.dismissKeyboard))
         view.addGestureRecognizer(tab)
     }
 
@@ -85,24 +81,17 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         // segue to ContentsController
         if segue.identifier == "send" {
-            NSLog("set destination")
             contentsController = segue.destination as! ContentsController
         }
-        
     }
     
     
-    
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Get user's input
-//
-////////////////////////////////////////////////////////////////////////////////
-    
-    // suggestion bar delegate variable
+
+//* Get user's input *//
+
+    /// Input value of `InputTextField` - SuggestionBar delegate variable
     var inputTextFieldValue: String {
         get {
             if let text = InputTextField.text {
@@ -111,6 +100,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
                 return ""
             }
         }
+        // if there is new input, modify `SuggestionBarView`
         set(text) {
             InputTextField.text = text
             searchByInputText()
@@ -124,7 +114,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     
     // search suggestion words in suggestion bar
     func searchByInputText() {
-        suggestionBarView.search(input: inputTextFieldValue)
+        suggestionBarView.search(for: inputTextFieldValue)
     }
     
     @IBAction func ClickSendButton(_ sender: Any) {
@@ -136,13 +126,9 @@ class ViewController: UIViewController, SuggestionBarDelegate {
     
     
     
-////////////////////////////////////////////////////////////////////////////////
-//
-//  Keyboard action
-//
-////////////////////////////////////////////////////////////////////////////////
+//* Keyboard action *//
     
-    // move view when keyboard show/hide
+    /// move view when keyboard show/hide
     func keyboardNotification(notification: Notification) {
         let userInfo = notification.userInfo!
         let keyboardHight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
@@ -150,7 +136,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UInt
         let moveUp = notification.name == NSNotification.Name.UIKeyboardWillShow
         
-        ContentsInputViewBottomConstraint.constant = moveUp ? -keyboardHight : 0
+        ContainerViewBottomConstraint.constant = moveUp ? -keyboardHight : 0
         let option = UIViewAnimationOptions(rawValue: curve << 16)
         
         UIView.animate(withDuration: duration, delay: 0, options: option, animations: {
@@ -158,7 +144,7 @@ class ViewController: UIViewController, SuggestionBarDelegate {
         }, completion: nil)
     }
     
-    // hide keyboard
+    /// hide keyboard
     func dismissKeyboard() {
         InputTextField.endEditing(true)
     }
